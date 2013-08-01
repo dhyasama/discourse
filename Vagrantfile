@@ -9,6 +9,8 @@ Vagrant.configure("2") do |config|
   # Make this VM reachable on the host network as well, so that other
   # VM's running other browsers can access our dev server.
   config.vm.network :private_network, ip: "192.168.10.200"
+  config.vm.hostname = "oc.dev.io"
+  config.hostsupdater.aliases = ["oc.dev.io"]
 
   # Make it so that network access from the vagrant guest is able to
   # use SSH private keys that are present on the host without copying
@@ -17,15 +19,16 @@ Vagrant.configure("2") do |config|
 
   config.vm.provider :virtualbox do |v|
     # This setting gives the VM 1024MB of RAM instead of the default 384.
-    v.customize ["modifyvm", :id, "--memory", [ENV['DISCOURSE_VM_MEM'].to_i, 1024].max]
+    v.customize ["modifyvm", :id, "--memory", [ENV['DISCOURSE_VM_MEM'].to_i, 2048].max]
 
     # This setting makes it so that network access from inside the vagrant guest
     # is able to resolve DNS using the hosts VPN connection.
     v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
   end
 
-  config.vm.network :forwarded_port, guest: 3000, host: 4000
+  config.vm.network :forwarded_port, guest: 3000, host: 80
   config.vm.network :forwarded_port, guest: 1080, host: 4080 # Mailcatcher
+  config.vm.network :forwarded_port, guest: 5432, host: 6432 # postgres
 
   nfs_setting = RUBY_PLATFORM =~ /darwin/ || RUBY_PLATFORM =~ /linux/
   config.vm.synced_folder ".", "/vagrant", id: "vagrant-root", :nfs => nfs_setting
