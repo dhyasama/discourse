@@ -78,6 +78,13 @@ PATH
     discourse_plugin (0.0.1)
 
 PATH
+  remote: vendor/gems/discourse_user_directory
+  specs:
+    discourse_user_directory (0.0.5)
+      coffee-rails
+      rails (~> 3.2.12)
+
+PATH
   remote: vendor/gems/rails_multisite
   specs:
     rails_multisite (0.0.1)
@@ -152,6 +159,13 @@ GEM
     clockwork (0.5.0)
       tzinfo (~> 0.3.35)
     coderay (1.0.9)
+    coffee-rails (3.2.2)
+      coffee-script (>= 2.2.0)
+      railties (~> 3.2.0)
+    coffee-script (2.2.0)
+      coffee-script-source
+      execjs
+    coffee-script-source (1.4.0)
     connection_pool (1.0.0)
     daemons (1.1.9)
     debug_inspector (0.0.2)
@@ -472,6 +486,7 @@ DEPENDENCIES
   diffy (>= 3.0)
   discourse_emoji!
   discourse_plugin!
+  discourse_user_directory!
   em-redis
   email_reply_parser!
   ember-rails

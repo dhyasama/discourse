@@ -994,6 +994,8 @@ en:
           one: "Unread (1)"
           other: "Unread ({{count}})"
         help: "tracked topics with unread posts"
+      directory:
+        title: "Directory"
       new:
         title:
           zero: "New"
